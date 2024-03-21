@@ -563,6 +563,7 @@ MonoBehaviour:
   SortTextData: []
   SortGameObjectBase: {fileID: 7263073127741517538}
   SortGameObjectRoot: {fileID: 7650265436819287799}
+  SortGameObjectList: []
   DisplayImage: {fileID: 8766075619809393565}
   Color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2858503149461934722
@@ -590,6 +591,7 @@ GameObject:
   - component: {fileID: 3281495235949318146}
   - component: {fileID: 5090429854457113720}
   - component: {fileID: 15643229820462635}
+  - component: {fileID: 6482193181472739044}
   m_Layer: 9
   m_Name: Type1
   m_TagString: Untagged
@@ -700,6 +702,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6482193181472739044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019597696657721195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64526909449eac049a12fd7c4ba8505b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: coin
 --- !u!1 &1039702839087181131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,7 +1439,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8266975610232554798}
   m_HandleRect: {fileID: 6228639178280430864}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3261,6 +3276,7 @@ GameObject:
   - component: {fileID: 1980108696447160323}
   - component: {fileID: 7010406136504881630}
   - component: {fileID: 4914212797215358733}
+  - component: {fileID: 7237469730406348812}
   m_Layer: 9
   m_Name: Type3
   m_TagString: Untagged
@@ -3371,6 +3387,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7237469730406348812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6657307522535637419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64526909449eac049a12fd7c4ba8505b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: accessories
 --- !u!1 &7263073127741517538
 GameObject:
   m_ObjectHideFlags: 0
@@ -3522,9 +3551,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemGameObjectText: 
   CurrentCountText: {fileID: 1147112158373309239}
+  itemImage: {fileID: 5760285151596351929}
+  colorImage: {fileID: 5871010762638198495}
   CurrentCount: 0
-  UIPropsListStateManager: {fileID: 5442015790748830179}
   Describe: 
+  itemType: 
   ChangeImage: 
   ColorString: 
 --- !u!1 &7468572721010255877
@@ -4177,6 +4208,7 @@ GameObject:
   - component: {fileID: 2794063313798841020}
   - component: {fileID: 1813192709413830316}
   - component: {fileID: 804487284373148823}
+  - component: {fileID: 8231892064057009128}
   m_Layer: 9
   m_Name: Type2
   m_TagString: Untagged
@@ -4287,6 +4319,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8231892064057009128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7853876387295349672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64526909449eac049a12fd7c4ba8505b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: purse
 --- !u!1 &7978288521647967773
 GameObject:
   m_ObjectHideFlags: 0
@@ -5039,7 +5084,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7637911353175528319}
   m_HandleRect: {fileID: 1694535334223428555}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

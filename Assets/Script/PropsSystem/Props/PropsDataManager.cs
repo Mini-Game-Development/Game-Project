@@ -9,29 +9,29 @@ using Game;
 public class PropsDataManager : MonoSingleton<PropsDataManager>
 {
     protected override bool _dontDestroyOnLoad => false;
-    public PropsItemList propsItemList;
+    public PropsItemDataList propsItemDataList;
 
     public string ChooseItemName;
     // Start is called before the first frame update
     void Start()
     {
-        propsItemList = new PropsItemList();
+        propsItemDataList = new PropsItemDataList();
         string exclPath = "Assets/Resources/DataTable/PropsData.xlsx";
         string sheetName = "DataPage";
         var excelRowData = ReadExcel(exclPath, sheetName);
-        propsItemList.ItemList = ItemDataToJson(excelRowData);
-        for (int i = 0; i < propsItemList.ItemList.Count; i++)
+        propsItemDataList.ItemList = ItemDataToJson(excelRowData);
+        /*for (int i = 0; i < propsItemDataList.ItemList.Count; i++)
         {
-            Debug.Log("propsItemList.ItemList[" + i + "].Id:" + propsItemList.ItemList[i].Id);
-            Debug.Log("propsItemList.ItemList[" + i + "].Name:" + propsItemList.ItemList[i].Name);
-            Debug.Log("propsItemList.ItemList[" + i + "].ItemType:" + propsItemList.ItemList[i].ItemType);
-            Debug.Log("propsItemList.ItemList[" + i + "].Describe:" + propsItemList.ItemList[i].Describe);
-            Debug.Log("propsItemList.ItemList[" + i + "].Price:" + propsItemList.ItemList[i].Price);
-            Debug.Log("propsItemList.ItemList[" + i + "].CanUse:" + propsItemList.ItemList[i].CanUse);
-            Debug.Log("propsItemList.ItemList[" + i + "].CanEquipped:" + propsItemList.ItemList[i].CanEquipped);
-            Debug.Log("propsItemList.ItemList[" + i + "].ItemTypeColor:" + propsItemList.ItemList[i].ItemTypeColor);
+            Debug.Log("propsItemDataList.ItemList[" + i + "].Id:" + propsItemDataList.ItemList[i].Id);
+            Debug.Log("propsItemDataList.ItemList[" + i + "].Name:" + propsItemDataList.ItemList[i].Name);
+            Debug.Log("propsItemDataList.ItemList[" + i + "].ItemType:" + propsItemDataList.ItemList[i].ItemType);
+            Debug.Log("propsItemDataList.ItemList[" + i + "].Describe:" + propsItemDataList.ItemList[i].Describe);
+            Debug.Log("propsItemDataList.ItemList[" + i + "].Price:" + propsItemDataList.ItemList[i].Price);
+            Debug.Log("propsItemDataList.ItemList[" + i + "].CanUse:" + propsItemDataList.ItemList[i].CanUse);
+            Debug.Log("propsItemDataList.ItemList[" + i + "].CanEquipped:" + propsItemDataList.ItemList[i].CanEquipped);
+            Debug.Log("propsItemDataList.ItemList[" + i + "].ItemTypeColor:" + propsItemDataList.ItemList[i].ItemTypeColor);
       
-        }
+        }*/
     }
 
     //Path檔案位置，excelSheet工作列表
@@ -45,13 +45,14 @@ public class PropsDataManager : MonoSingleton<PropsDataManager>
             return result.Tables[excelSheet].Rows;
         }
     }
-    public List<PropsItemBase> ItemDataToJson(DataRowCollection data)
+    public List<PropItemData> ItemDataToJson(DataRowCollection data)
     {
-        List<PropsItemBase> DataList = new List<PropsItemBase>();
-        PropsItemBase Data;
+        List<PropItemData> DataList = new List<PropItemData>();
+        PropItemData Data;
+        // 前三行為說明欄位
         for (int i = 3; i < data.Count; i++)
         {
-            Data = new PropsItemBase();
+            Data = new PropItemData();
             Data.Id = int.Parse(data[i][0].ToString());
             Data.Name = data[i][1].ToString();
             Data.ItemType = data[i][2].ToString();
@@ -66,9 +67,9 @@ public class PropsDataManager : MonoSingleton<PropsDataManager>
         return DataList;
     }
     [SerializeField]
-    public class PropsItemList
+    public class PropsItemDataList
     {
-        public List<PropsItemBase> ItemList = new List<PropsItemBase>();
+        public List<PropItemData> ItemList = new List<PropItemData>();
     }
 
 }

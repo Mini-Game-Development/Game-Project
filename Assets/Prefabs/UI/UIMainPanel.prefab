@@ -2173,7 +2173,7 @@ PrefabInstance:
     - target: {fileID: 2061005615105961755, guid: 78198962c6fb5b34981437862ee8067e,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2628485579784970722, guid: 78198962c6fb5b34981437862ee8067e,
         type: 3}
@@ -2250,6 +2250,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5442015790748830179, guid: 78198962c6fb5b34981437862ee8067e,
+        type: 3}
+      propertyPath: CoinText
+      value: 
+      objectReference: {fileID: 5996793932826599066}
     - target: {fileID: 5468206018308778735, guid: 78198962c6fb5b34981437862ee8067e,
         type: 3}
       propertyPath: m_RootOrder
@@ -2313,7 +2318,7 @@ PrefabInstance:
     - target: {fileID: 5475316724752737985, guid: 78198962c6fb5b34981437862ee8067e,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5737424152807970410, guid: 78198962c6fb5b34981437862ee8067e,
         type: 3}
@@ -2418,7 +2423,7 @@ PrefabInstance:
     - target: {fileID: 8515471066948054823, guid: 78198962c6fb5b34981437862ee8067e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8648715269844903522, guid: 78198962c6fb5b34981437862ee8067e,
         type: 3}

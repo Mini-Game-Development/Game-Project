@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 [System.Serializable]
-public struct PropsItemBase
+public struct PropItemData
 {
     public int Id;
     public string Name;
@@ -20,7 +20,7 @@ public struct PropsItemBase
 }
 
 [System.Serializable]
-public enum PropsItemBaseType
+public enum PropItemDataType
 {
     coin,           //¿ú¹ô
     purse,          //¿ú±a

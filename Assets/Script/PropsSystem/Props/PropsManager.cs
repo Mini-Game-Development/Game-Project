@@ -5,37 +5,38 @@ using UnityEngine;
 public class PropsManager : MonoBehaviour
 {
     [SerializeField]
-    private PropsSystem UIPropsListStateManager;
+    private PropsItemManager propsItemManager;
+    private List<PropItemData> propsItemList = new List<PropItemData>(); 
     // Start is called before the first frame update
     void Start()
     {
-
+        propsItemList = PropsDataManager.Instance.propsItemDataList.ItemList;
         RoomListinit();
     }
 
     void RoomListinit()
     {
-        for (int i = 0; i < PropsDataManager.Instance.propsItemList.ItemList.Count; i++)
+        for (int i = 0; i < propsItemList.Count; i++)
         {
-            AddRoomItem(PropsDataManager.Instance.propsItemList.ItemList[i].Name);
+            AddRoomItem(propsItemList[i].Name);
         }
     }
 
-    public void AddListData(PropsItemBase data)
+    public void AddListData(PropItemData data)
     {
-        PropsDataManager.Instance.propsItemList.ItemList.Add(data);
+        PropsDataManager.Instance.propsItemDataList.ItemList.Add(data);
         AddRoomItem(data.Name);
     }
 
     public void AddRoomItem(string name)
     {
-        UIPropsListStateManager.CreateButton(name);
+        propsItemManager.CreateButton(name);
     }
-    public void DelRoomItem(string name)
+    public void DeleteRoomItem(string name)
     {
-        var index = PropsDataManager.Instance.propsItemList.ItemList.Find(data => data.Name == name);
-        PropsDataManager.Instance.propsItemList.ItemList.Remove(index);
-        UIPropsListStateManager.DelButton(name);
+        var index = PropsDataManager.Instance.propsItemDataList.ItemList.Find(data => data.Name == name);
+        PropsDataManager.Instance.propsItemDataList.ItemList.Remove(index);
+        propsItemManager.DeleteButton(name);
     }
 
     public void UpdateCurrentCount(string state)

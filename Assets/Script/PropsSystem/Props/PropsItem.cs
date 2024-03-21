@@ -3,15 +3,17 @@ using Game;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Drawing;
 
-public class PropsButtonSetting : MonoBehaviour
+public class PropsItem : PropsUIBase
 {
     public string ItemGameObjectText;
     public TMP_Text CurrentCountText;
+    public Image itemImage;
+    public Image colorImage;
     public int CurrentCount;
-    [SerializeField]
-    private PropsSystem UIPropsListStateManager;
     public string Describe;
+    public string itemType;
     public string ChangeImage;
     public string ColorString;
     // Start is called before the first frame update
@@ -21,11 +23,15 @@ public class PropsButtonSetting : MonoBehaviour
         TMP_Text SortText;
         SortText = CurrentCountText.GetComponent<TMP_Text>();
         SortText.text = CurrentCount.ToString();
+
+        UnityEngine.Color _color;
+        ColorUtility.TryParseHtmlString("#" + ColorString, out _color);
+        colorImage.color = _color;
     }
 
     public void getCurrentSortButtonActive()
     {
-        UIPropsListStateManager.UpdateDisplay(ItemGameObjectText,ChangeImage, ColorString, Describe);
+        PropsItemManager.Instance.UpdateDisplay(ItemGameObjectText,ChangeImage, ColorString, Describe);
         PropsDataManager.Instance.ChooseItemName = ItemGameObjectText.ToString();
     }
 }

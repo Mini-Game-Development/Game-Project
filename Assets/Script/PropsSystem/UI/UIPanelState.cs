@@ -16,14 +16,6 @@ public class UIPanelState : MonoBehaviour
     }
     public void PanelInit()
     {
-       
-        /*for (int i=0; i< PanelList.Length;i++)
-        {
-            UIPanelSetting _UIPanelSetting;
-            _UIPanelSetting = PanelList[i].GetComponent<UIPanelSetting>();
-            _UIPanelSetting.ID = numberList[i];
-        }*/
-
     }
 
     public void OpenPanel(int ID)
