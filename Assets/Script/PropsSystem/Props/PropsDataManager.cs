@@ -9,17 +9,17 @@ using Game;
 public class PropsDataManager : MonoSingleton<PropsDataManager>
 {
     protected override bool _dontDestroyOnLoad => false;
-    public PropsItemDataList propsItemDataList;
+    public PropsItemDataList propsDataList;
 
     public string ChooseItemName;
     // Start is called before the first frame update
     void Start()
     {
-        propsItemDataList = new PropsItemDataList();
+        propsDataList = new PropsItemDataList();
         string exclPath = "Assets/Resources/DataTable/PropsData.xlsx";
         string sheetName = "DataPage";
         var excelRowData = ReadExcel(exclPath, sheetName);
-        propsItemDataList.ItemList = ItemDataToJson(excelRowData);
+        propsDataList.ItemList = ItemDataToJson(excelRowData);
         /*for (int i = 0; i < propsItemDataList.ItemList.Count; i++)
         {
             Debug.Log("propsItemDataList.ItemList[" + i + "].Id:" + propsItemDataList.ItemList[i].Id);
@@ -45,14 +45,14 @@ public class PropsDataManager : MonoSingleton<PropsDataManager>
             return result.Tables[excelSheet].Rows;
         }
     }
-    public List<PropItemData> ItemDataToJson(DataRowCollection data)
+    public List<PropsData> ItemDataToJson(DataRowCollection data)
     {
-        List<PropItemData> DataList = new List<PropItemData>();
-        PropItemData Data;
+        List<PropsData> DataList = new List<PropsData>();
+        PropsData Data;
         // 前三行為說明欄位
         for (int i = 3; i < data.Count; i++)
         {
-            Data = new PropItemData();
+            Data = new PropsData();
             Data.Id = int.Parse(data[i][0].ToString());
             Data.Name = data[i][1].ToString();
             Data.ItemType = data[i][2].ToString();
@@ -69,7 +69,7 @@ public class PropsDataManager : MonoSingleton<PropsDataManager>
     [SerializeField]
     public class PropsItemDataList
     {
-        public List<PropItemData> ItemList = new List<PropItemData>();
+        public List<PropsData> ItemList = new List<PropsData>();
     }
 
 }

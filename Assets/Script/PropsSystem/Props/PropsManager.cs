@@ -1,16 +1,18 @@
+using Game;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropsManager : MonoBehaviour
+public class PropsManager : MonoSingleton<PropsManager>
 {
+    protected override bool _dontDestroyOnLoad => false;
     [SerializeField]
     private PropsItemManager propsItemManager;
-    private List<PropItemData> propsItemList = new List<PropItemData>(); 
+    private List<PropsData> propsItemList = new List<PropsData>(); 
     // Start is called before the first frame update
     void Start()
     {
-        propsItemList = PropsDataManager.Instance.propsItemDataList.ItemList;
+        propsItemList = PropsDataManager.Instance.propsDataList.ItemList;
         RoomListinit();
     }
 
@@ -18,29 +20,45 @@ public class PropsManager : MonoBehaviour
     {
         for (int i = 0; i < propsItemList.Count; i++)
         {
-            AddRoomItem(propsItemList[i].Name);
+            propsItemManager.CreateButton(propsItemList[i].Name);
         }
     }
 
-    public void AddListData(PropItemData data)
+    public void AddProps(PropsData data, int propsCount)
     {
-        PropsDataManager.Instance.propsItemDataList.ItemList.Add(data);
-        AddRoomItem(data.Name);
+        PropsData oldData = propsItemList.Find(item => item.Name == data.Name);
+        
+        if(oldData == null)
+        {
+            var newData = PropsDataManager.Instance.propsDataList.ItemList.Find(item => item.Name == data.Name);
+            propsItemList.Add(newData);
+            propsItemManager.CreateButton(data.Name, propsCount);
+        }
+        else
+        {
+            propsItemManager.UpdatePropsItem(oldData.Name, propsCount);
+        }
     }
 
-    public void AddRoomItem(string name)
+    public void AddProps(string name, int numberOfProps = 1)
     {
-        propsItemManager.CreateButton(name);
+        PropsData oldData = propsItemList.Find(item => item.Name == name);
+        
+        if (oldData == null)
+        {
+            var newData = PropsDataManager.Instance.propsDataList.ItemList.Find(item => item.Name == name);
+            propsItemList.Add(newData);
+            propsItemManager.CreateButton(name, numberOfProps);
+        }
+        else
+        {
+            propsItemManager.UpdatePropsItem(oldData.Name, numberOfProps);
+        }
     }
-    public void DeleteRoomItem(string name)
+    public void DeleteProps(string name)
     {
-        var index = PropsDataManager.Instance.propsItemDataList.ItemList.Find(data => data.Name == name);
-        PropsDataManager.Instance.propsItemDataList.ItemList.Remove(index);
+        var index = PropsDataManager.Instance.propsDataList.ItemList.Find(data => data.Name == name);
+        PropsDataManager.Instance.propsDataList.ItemList.Remove(index);
         propsItemManager.DeleteButton(name);
-    }
-
-    public void UpdateCurrentCount(string state)
-    {
-
     }
 }

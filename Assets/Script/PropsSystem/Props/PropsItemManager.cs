@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PropsItemManager : MonoSingleton<PropsItemManager>
 {
-    protected override bool _dontDestroyOnLoad => false;
+    protected override bool _dontDestroyOnLoad  => false;
     // Start is called before the first frame update
     public TMP_Text CurrentTypeText, CoinText;
     public TMP_Text Backpack, LuckyCat, JewelryHouse;
@@ -33,13 +33,29 @@ public class PropsItemManager : MonoSingleton<PropsItemManager>
     // For type display
     public string currentDisplayItemType = string.Empty;
 
-    public void CreateButton(string name)
+    public void UpdatePropsItem(string name, int numberOfProps)
     {
-        var itemData = PropsDataManager.Instance.propsItemDataList.ItemList.Find(data => data.Name == name);
-        CreateItem(itemData);
-        SortGameObjectBase.SetActive(false);
+        PropsItem item = FindPropsItemByName(name);
+
+        if (item != null)
+        {
+            Debug.Log("w");
+            item.CurrentCount += numberOfProps;
+            item.CurrentCountText.text = item.CurrentCount.ToString();
+        }
     }
-    private void CreateItem(PropItemData itemData)
+
+    public void CreateButton(string name, int count = 1)
+    {
+        var itemData = PropsDataManager.Instance.propsDataList.ItemList.Find(data => data.Name == name);
+        if (itemData != null)
+        {
+            Debug.Log("W3W");
+            CreateItem(itemData, count);
+            SortGameObjectBase.SetActive(false);
+        }
+    }
+    private void CreateItem(PropsData itemData, int propsCount = 1)
     {
         if (SortGameObjectBase)
             SortGameObjectBase.SetActive(true);
@@ -48,16 +64,14 @@ public class PropsItemManager : MonoSingleton<PropsItemManager>
         
         PropsItem propsItem;
         propsItem = ItemGameObject.GetComponent<PropsItem>();
-        propsItem.itemType = itemData.ItemType;
-        propsItem.CurrentCount = 1;
-        propsItem.ItemGameObjectText = itemData.Name;
-        propsItem.ChangeImage = itemData.ChangeImage;
-        propsItem.ColorString = itemData.ItemTypeColor;
-        propsItem.Describe = itemData.Describe;
+        propsItem.UpdateData(itemData, propsCount);
+        propsItem.CurrentCount = propsCount;
+        propsItem.CurrentCountText.text = propsCount.ToString();
         ItemGameObject.transform.rotation = SortGameObjectBase.transform.rotation;
 
-        UIPropsListItem itemList;
+        UIPropsListItem itemList = new UIPropsListItem();
         itemList.Name = itemData.Name;
+        itemList.itemCount = propsCount;
         itemList.ItemObject = ItemGameObject;
         SortGameObjectList.Add(itemList);
     }

@@ -29,6 +29,18 @@ public class PropsItem : PropsUIBase
         colorImage.color = _color;
     }
 
+    public void UpdateData(PropsData data, int propsCount)
+    {
+        itemType = data.ItemType;
+        ItemGameObjectText = data.Name;
+        ChangeImage = data.ChangeImage;
+        ColorString = data.ItemTypeColor;
+        Describe = data.Describe;
+
+        CurrentCount = propsCount;
+        CurrentCountText.text = CurrentCount.ToString();
+    }
+
     public void getCurrentSortButtonActive()
     {
         PropsItemManager.Instance.UpdateDisplay(ItemGameObjectText,ChangeImage, ColorString, Describe);

@@ -12,10 +12,7 @@ public class AddItemButton : MonoBehaviour
 
     }
     public void OnButtonClicked()
-    {
-        for (int i = 0; i < newItemCount; ++i)
-        {
-            PropsItemManager.Instance.CreateButton(itemName);
-        }
+    { 
+        PropsManager.Instance.AddProps(itemName, newItemCount);
     }
 }

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 [System.Serializable]
-public struct PropItemData
+public class PropsData
 {
     public int Id;
     public string Name;
@@ -20,15 +20,16 @@ public struct PropItemData
 }
 
 [System.Serializable]
-public enum PropItemDataType
+public enum PropsDataType
 {
     coin,           //錢幣
     purse,          //錢帶
     accessories,    //飾品
 }
 [System.Serializable]
-public struct UIPropsListItem
+public class UIPropsListItem
 {
     public string Name;
+    public int itemCount;
     public GameObject ItemObject;
 }
