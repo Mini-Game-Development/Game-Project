@@ -7,7 +7,8 @@ using System.Drawing;
 
 public class PropsItem : PropsUIBase
 {
-    public string ItemGameObjectText;
+    public ulong UIID;
+    public string itemName;
     public TMP_Text CurrentCountText;
     public Image itemImage;
     public Image colorImage;
@@ -32,7 +33,7 @@ public class PropsItem : PropsUIBase
     public void UpdateData(PropsData data, int propsCount)
     {
         itemType = data.ItemType;
-        ItemGameObjectText = data.Name;
+        itemName = data.Name;
         ChangeImage = data.ChangeImage;
         ColorString = data.ItemTypeColor;
         Describe = data.Describe;
@@ -43,8 +44,8 @@ public class PropsItem : PropsUIBase
 
     public void getCurrentSortButtonActive()
     {
-        PropsItemManager.Instance.UpdateDisplay(ItemGameObjectText,ChangeImage, ColorString, Describe);
-        PropsDataManager.Instance.ChooseItemName = ItemGameObjectText.ToString();
+        PropsItemManager.Instance.UpdateDisplay(UIID);
+        //PropsDataManager.Instance.ChooseItemName = ItemGameObjectText.ToString();
     }
 }
 

@@ -29,6 +29,7 @@ public enum PropsDataType
 [System.Serializable]
 public class UIPropsListItem
 {
+    public ulong UIID;
     public string Name;
     public int itemCount;
     public GameObject ItemObject;

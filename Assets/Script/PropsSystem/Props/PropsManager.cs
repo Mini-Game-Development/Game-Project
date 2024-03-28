@@ -8,31 +8,30 @@ public class PropsManager : MonoSingleton<PropsManager>
     protected override bool _dontDestroyOnLoad => false;
     [SerializeField]
     private PropsItemManager propsItemManager;
-    private List<PropsData> propsItemList = new List<PropsData>(); 
+    private List<PropsData> propsList = new List<PropsData>(); 
     // Start is called before the first frame update
     void Start()
     {
-        propsItemList = PropsDataManager.Instance.propsDataList.ItemList;
+        propsList = PropsDataManager.Instance.propsDataList.datas;
         RoomListinit();
     }
 
     void RoomListinit()
     {
-        for (int i = 0; i < propsItemList.Count; i++)
+        for (int i = 0; i < propsList.Count; i++)
         {
-            propsItemManager.CreateButton(propsItemList[i].Name);
+            propsItemManager.AddItem(propsList[i].Name);
         }
     }
 
     public void AddProps(PropsData data, int propsCount)
     {
-        PropsData oldData = propsItemList.Find(item => item.Name == data.Name);
+        PropsData oldData = propsList.Find(item => item.Name == data.Name);
         
         if(oldData == null)
         {
-            var newData = PropsDataManager.Instance.propsDataList.ItemList.Find(item => item.Name == data.Name);
-            propsItemList.Add(newData);
-            propsItemManager.CreateButton(data.Name, propsCount);
+            var newData = PropsDataManager.Instance.propsDataList.datas.Find(item => item.Name == data.Name);
+            propsList.Add(newData);
         }
         else
         {
@@ -42,23 +41,30 @@ public class PropsManager : MonoSingleton<PropsManager>
 
     public void AddProps(string name, int numberOfProps = 1)
     {
-        PropsData oldData = propsItemList.Find(item => item.Name == name);
+        PropsData oldData = propsList.Find(item => item.Name == name);
         
         if (oldData == null)
         {
-            var newData = PropsDataManager.Instance.propsDataList.ItemList.Find(item => item.Name == name);
-            propsItemList.Add(newData);
-            propsItemManager.CreateButton(name, numberOfProps);
+            var newData = PropsDataManager.Instance.propsDataList.datas.Find(item => item.Name == name);
+            propsList.Add(newData);
         }
         else
         {
             propsItemManager.UpdatePropsItem(oldData.Name, numberOfProps);
         }
     }
-    public void DeleteProps(string name)
+    public void UseButton()
     {
-        var index = PropsDataManager.Instance.propsDataList.ItemList.Find(data => data.Name == name);
-        PropsDataManager.Instance.propsDataList.ItemList.Remove(index);
-        propsItemManager.DeleteButton(name);
+        DeleteProps();
+    }
+
+    public void DeleteProps()
+    {
+        propsItemManager.DeletePropsItem();
+    }
+
+    public void UpdateDisplay(ulong targetUIID)
+    {
+        propsItemManager.UpdateDisplay(targetUIID);
     }
 }

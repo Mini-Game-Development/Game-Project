@@ -19,19 +19,7 @@ public class PropsDataManager : MonoSingleton<PropsDataManager>
         string exclPath = "Assets/Resources/DataTable/PropsData.xlsx";
         string sheetName = "DataPage";
         var excelRowData = ReadExcel(exclPath, sheetName);
-        propsDataList.ItemList = ItemDataToJson(excelRowData);
-        /*for (int i = 0; i < propsItemDataList.ItemList.Count; i++)
-        {
-            Debug.Log("propsItemDataList.ItemList[" + i + "].Id:" + propsItemDataList.ItemList[i].Id);
-            Debug.Log("propsItemDataList.ItemList[" + i + "].Name:" + propsItemDataList.ItemList[i].Name);
-            Debug.Log("propsItemDataList.ItemList[" + i + "].ItemType:" + propsItemDataList.ItemList[i].ItemType);
-            Debug.Log("propsItemDataList.ItemList[" + i + "].Describe:" + propsItemDataList.ItemList[i].Describe);
-            Debug.Log("propsItemDataList.ItemList[" + i + "].Price:" + propsItemDataList.ItemList[i].Price);
-            Debug.Log("propsItemDataList.ItemList[" + i + "].CanUse:" + propsItemDataList.ItemList[i].CanUse);
-            Debug.Log("propsItemDataList.ItemList[" + i + "].CanEquipped:" + propsItemDataList.ItemList[i].CanEquipped);
-            Debug.Log("propsItemDataList.ItemList[" + i + "].ItemTypeColor:" + propsItemDataList.ItemList[i].ItemTypeColor);
-      
-        }*/
+        propsDataList.datas = ItemDataToJson(excelRowData);
     }
 
     //Path檔案位置，excelSheet工作列表
@@ -66,10 +54,26 @@ public class PropsDataManager : MonoSingleton<PropsDataManager>
         }
         return DataList;
     }
+
+    public bool TryFindDataWithName(string targetPropName, out PropsData data)
+    {
+        foreach(var propsData in propsDataList.datas)
+        {
+            if (propsData.Name == targetPropName)
+            { 
+                data = propsData;
+                return true; 
+            }
+        }
+
+        data = null;
+        return false;
+    }
+
     [SerializeField]
     public class PropsItemDataList
     {
-        public List<PropsData> ItemList = new List<PropsData>();
+        public List<PropsData> datas = new List<PropsData>();
     }
 
 }

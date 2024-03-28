@@ -13,6 +13,6 @@ public class AddItemButton : MonoBehaviour
     }
     public void OnButtonClicked()
     { 
-        PropsManager.Instance.AddProps(itemName, newItemCount);
+        PropsItemManager.Instance.AddItem(itemName, newItemCount);
     }
 }
