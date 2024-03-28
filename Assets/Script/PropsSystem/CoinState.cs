@@ -17,6 +17,13 @@ public class CoinState : MonoBehaviour
     {
         CoinNumber -= number;
         CoinText.text = CoinNumber.ToString();
+
+        for (int i = 0; i < number; i += 10)
+        {
+            int newItemId = Random.Range(1, 15);
+            string itemName = PropsDataManager.Instance.propsDataList.datas.Find(item => item.Id == newItemId).Name;
+            PropsItemManager.Instance.AddItem(itemName);
+        }
     }
     public void Plus(int number)
     {

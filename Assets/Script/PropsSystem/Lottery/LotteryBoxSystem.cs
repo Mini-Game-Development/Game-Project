@@ -68,6 +68,8 @@ public class LotteryBoxSystem : MonoBehaviour
     {
         m_Aniamtor.SetBool("Open", true);
         m_CurrentSelectedIndex = Choose();
+        string itemName = PropsDataManager.Instance.propsDataList.datas.Find(item => item.Id == m_CurrentSelectedIndex + 3).Name;
+        PropsItemManager.Instance.AddItem(itemName);
         m_LootObjects[m_CurrentSelectedIndex].SetActive(true);
 
     }
