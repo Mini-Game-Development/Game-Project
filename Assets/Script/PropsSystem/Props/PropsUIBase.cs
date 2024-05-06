@@ -2,25 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
-public class PropsUIBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
+public class PropsUIBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler, IPointerClickHandler
 {
-    public void OnPointerDown(PointerEventData eventData)
+    public Image propsImage;
+    private double clickTime = 0;
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
-        PropsItemManager.Instance.RecordPressedItemTransform(this);
+        MouseDragManager.Instance.SetPressedUI(this);
     }
-    public void OnPointerUp(PointerEventData eventData)
+    public virtual void OnPointerUp(PointerEventData eventData)
     {
-        PropsItemManager.Instance.TrySwapItemTransform();
+        MouseDragManager.Instance.ReleasePressedUI();
     }
-    public void OnPointerEnter(PointerEventData data)
+    public virtual void OnPointerEnter(PointerEventData data)
     {
-        PropsItemManager.Instance.RecordHoveredItemTransform(this);
+        MouseDragManager.Instance.SetHoveredUI(this);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
-        PropsItemManager.Instance.RemoveHoveredItemTransformRecord();
+        MouseDragManager.Instance.ReleaseHoverdUI();
+        clickTime = 0;
+    }
+
+    public virtual void OnPointerClick(PointerEventData eventData)
+    {
+        if(clickTime > 0 && clickTime + 0.3f >= Time.time)
+        {
+            clickTime = 0;
+            Action();
+        }
+        else if (clickTime < Time.time)
+        {
+            clickTime = Time.time;
+        }
+        else
+        {
+            clickTime = 0;
+        }
+    }
+
+    public virtual bool TrySetData(string dataString)
+    {
+        return true;
+    }
+
+    public virtual string GetDataString()
+    {
+        return string.Empty;
+    }
+
+    public virtual void Action()
+    {
+        Debug.Log("Action");
     }
 }
