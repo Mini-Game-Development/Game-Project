@@ -28,6 +28,7 @@ public class PropsItemManager : MonoSingleton<PropsItemManager>
     public Color Color;
 
     [SerializeField] private List<PropsItem> equipmentList = new List<PropsItem>();
+    [SerializeField] private List<Props> propsRecord = new List<Props>();
     private List<PropsItem> propsItemList = new List<PropsItem>();
     
     // For Item Swapping
@@ -54,8 +55,10 @@ public class PropsItemManager : MonoSingleton<PropsItemManager>
         if (propsData == null)
             return;
 
+        
         int remain = numberOfProps;
         int maxStackLimit = propsData.maxStackLimit;
+
         if (FindAllPropsItemOfId(newPropsId, out PropsItem[] itemsWithSameId))
         {
             foreach(var item in itemsWithSameId)
@@ -142,6 +145,24 @@ public class PropsItemManager : MonoSingleton<PropsItemManager>
             propsIdList[i] = equipmentList[i].propsId;
         }
         return propsIdList;
+    }
+
+    private void AddPropsRecord(int propsId, int numbersToAdd)
+    {
+        Props props = propsRecord.Find(target => target.propsId == propsId);
+        if(props != null)
+        {
+            props.CurrentCount += numbersToAdd;
+        }
+    }
+
+    private void RemovePropRecord(int propsId, int numbersToRemove)
+    {
+        Props props = propsRecord.Find(target => target.propsId == propsId);
+        if (props != null)
+        {
+            props.CurrentCount -= numbersToRemove;
+        }
     }
 
     public void ChooseDisplayType(string targetItemType)

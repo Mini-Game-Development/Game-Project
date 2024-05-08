@@ -106,7 +106,27 @@ public class PropsItem : PropsUIBase
     public override void Action()
     {
         base.Action();
+        var data = PropsDataManager.Instance.GetItemOfID(propsId);
+        if (data == null)
+            return;
+        if (!data.isUsable)
+            return;
+
+        string[] infos = data.ability.Split("_");
+        if (infos[0] == "Coin")
+            ChangeMoney(infos[1], infos[2]);
+
         PropsItemManager.Instance.DeleteProps(itemIndex);
+    }
+
+    private void ChangeMoney(string acitonString, string numberString)
+    {
+        switch(acitonString)
+        {
+            case "Count":
+                GameEventManager.Instance.SendEvent(GameEvent.Add_Money, numberString);
+                break;
+        }
     }
 }
 

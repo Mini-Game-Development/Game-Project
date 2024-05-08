@@ -16,4 +16,9 @@ public enum GameEvent
     Input_MouseRightUp = 21,
     Input_MouseLeftDown = 22,
     Input_MouseLeftUp = 23,
+
+
+    //Money
+    Add_Money = 100,
+    Minus_Money = 101,
 }

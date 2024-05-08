@@ -1,3 +1,4 @@
+using Game;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,7 +13,26 @@ public class CoinState : MonoBehaviour
     {
         coinNumber = 1000;
         CoinText.text = coinNumber.ToString();
+        GameEventManager.Instance.RegisterEvent(GameEvent.Add_Money, OnAddMoney);
+        GameEventManager.Instance.RegisterEvent(GameEvent.Minus_Money, OnMinusMoney);
     }
+    private  void OnAddMoney(string param)
+    {
+        int? number = int.Parse(param);
+        if (number != null)
+        {
+            Plus((int)number);
+        }
+    }
+    private void OnMinusMoney(string param)
+    {
+        int? number = int.Parse(param);
+        if (number != null)
+        {
+            Minus((int)number);
+        }
+    }
+
     public void Minus(int number)
     {
         UpdateCoin(-number);

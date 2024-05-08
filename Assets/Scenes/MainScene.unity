@@ -835,6 +835,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5079010778793382834, guid: 1b795554add5a264cb60f378471f9d97,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5468206018308778735, guid: 1b795554add5a264cb60f378471f9d97,
         type: 3}
       propertyPath: m_RootOrder
@@ -1401,6 +1406,7 @@ GameObject:
   - component: {fileID: 1818843104}
   - component: {fileID: 1818843106}
   - component: {fileID: 1818843107}
+  - component: {fileID: 1818843108}
   m_Layer: 0
   m_Name: PropsDataManager
   m_TagString: Untagged
@@ -1470,6 +1476,7 @@ MonoBehaviour:
   - {fileID: 1334272175}
   - {fileID: 1025640924}
   - {fileID: 1157169510}
+  propsRecord: []
   currentDisplayItemType: 
 --- !u!114 &1818843107
 MonoBehaviour:
@@ -1484,6 +1491,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   draggingDisplayRoot: {fileID: 564943565}
+--- !u!114 &1818843108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818843101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e03ec65c494cac419f14ea07210eb26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2085005247 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3751329818844372185, guid: 1b795554add5a264cb60f378471f9d97,
