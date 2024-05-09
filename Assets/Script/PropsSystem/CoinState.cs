@@ -99,7 +99,7 @@ public class CoinState : MonoBehaviour
     {
         if (operationString.Contains("%"))
         {
-            operationString.Replace("%", "");
+            operationString = operationString.Replace("%", "");
             number *= (100 + int.Parse(operationString)) / 100;
 
             return number;

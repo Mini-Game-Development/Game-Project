@@ -52,7 +52,7 @@ public class MouseDragManager : MonoSingleton<MouseDragManager>
             pressedUICache = null;
             draggingImage.enabled = false;
         }
-        else
+        else if(pressedUICache != null)
         {
             string dataString = hoveredUICache.GetDataString();
             if (hoveredUICache.TrySetData(pressedUICache.GetDataString()) && pressedUICache.TrySetData(dataString))

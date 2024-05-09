@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Drawing;
+using UnityEngine.EventSystems;
 
 public class PropsItem : PropsUIBase
 {
@@ -69,7 +70,7 @@ public class PropsItem : PropsUIBase
 
     protected virtual void RefreshUI()
     {
-        Debug.Log($"Index = {itemIndex}, propsId = {propsId}, currentCount = {currentCount}");
+        //Debug.Log($"Index = {itemIndex}, propsId = {propsId}, currentCount = {currentCount}");
         if (currentCount > 0)
         {
             itemImage.gameObject.SetActive(true);
@@ -93,12 +94,16 @@ public class PropsItem : PropsUIBase
         
     }
 
-    public void getCurrentSortButtonActive()
+    public override void OnPointerDown(PointerEventData eventData)
     {
+        base.OnPointerDown(eventData);
+        var data = PropsDataManager.Instance.GetItemOfID(propsId);
+        if (data == null)
+            return;
+
         if (currentCount > 0)
         {
-            var data = PropsDataManager.Instance.GetItemOfID(propsId);
-            PropsItemManager.Instance.UpdateDisplay(itemIndex);
+            PropsItemManager.Instance.UpdateDisplay(propsId);
         }
         //PropsDataManager.Instance.ChooseItemName = ItemGameObjectText.ToString();
     }

@@ -1,12 +1,8 @@
 using Game;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Profiling;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class PropsItemManager : MonoSingleton<PropsItemManager>
 {
@@ -192,10 +188,9 @@ public class PropsItemManager : MonoSingleton<PropsItemManager>
         }
     }
     
-    public void UpdateDisplay(int itemIndex)
+    public void UpdateDisplay(int itemId)
     {
-        int dataId = propsItemList[itemIndex].propsId;
-        var displayData = PropsDataManager.Instance.GetItemOfID(dataId);
+        var displayData = PropsDataManager.Instance.GetItemOfID(itemId);
         if (displayData != null)
         {
             /*Sprite _tex = Resources.Load<Sprite>("UIPropsListSprite/" + displayData.ChangeImage);

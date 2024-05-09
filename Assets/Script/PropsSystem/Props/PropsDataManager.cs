@@ -26,9 +26,13 @@ public class PropsDataManager : MonoSingleton<PropsDataManager>
     //Path檔案位置，excelSheet工作列表
     public void ReadTable(string filePath)
     {
-        StreamReader reader = new StreamReader(filePath);
-        string fileContents = reader.ReadToEnd();
-        propsDataList = JsonUtility.FromJson<PropsItemDataList>(fileContents);
+        string path = Path.Combine(Application.streamingAssetsPath, "PropsDataTable.txt");
+        string text = File.ReadAllText(path);
+        //var text = Resources.Load<TextAsset>("PropsDataTable.txt");
+        //var text = Resources.Load(Application.dataPath+ "/Resources/DataTable/PropsDataTable") as TextAsset;
+
+        Debug.Log(text);
+        propsDataList = JsonUtility.FromJson<PropsItemDataList>(text);
     }
    
     public PropsData GetItemOfID(int targetId)
